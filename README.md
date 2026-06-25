@@ -1,4 +1,4 @@
-# SCOPE GPP Model Inference and Training Dashboard
+# TabPFN GPP Model
 
 This repository provides code and pre-trained models to perform GPP (Gross Primary Productivity) modeling and wavelength importance analysis using a unified **TabPFN** regression pipeline. 
 
