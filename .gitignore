@@ -1,0 +1,32 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments and Virtualenvs
+.venv/
+venv/
+ENV/
+env/
+build/
+dist/
+
+# Generated Outputs & Temporary Files
+Inference/gpp_inference_results.csv
+Inference/gpp_inference_scatterplot.png
+Inference/example_inference.csv.bak
+SCOPE/tabpfn_model_PLS.joblib
+SCOPE/pls_model_PLS.joblib
+SCOPE/tabpfn_pls_feature_info.joblib
+SCOPE/GPP_test_predictions_TabPFN_PLS.csv
+SCOPE/train_PLS_scores.csv
+SCOPE/test_PLS_scores.csv
+SCOPE/GPP_test_density_scatter_TabPFN_PLS.png
+SCOPE/tabpfn_wavelength_importance.png
+SCOPE/tabpfn_wavelength_importance.csv
+
+# IDE / System files
+.vscode/
+.idea/
+.DS_Store
+.ipynb_checkpoints/

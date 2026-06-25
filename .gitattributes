@@ -1,0 +1,2 @@
+# Track large joblib serialized models with Git LFS
+*.joblib filter=lfs diff=lfs merge=lfs -text

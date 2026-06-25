@@ -1,0 +1,10 @@
+numpy
+pandas
+joblib
+PyQt6
+matplotlib
+seaborn
+scikit-learn
+tabpfn
+torch
+scipy
