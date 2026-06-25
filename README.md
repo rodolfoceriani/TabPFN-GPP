@@ -20,16 +20,17 @@ This project utilizes the **TabPFN** model weights and inference library from Pr
 ├── README.md               # This documentation file
 ├── requirements.txt        # Python dependency list
 │
-├── Inference/
-│   ├── gpp_gui.py           # PyQt6 Desktop GUI dashboard for running model inference
+├── Model/
 │   ├── TabPFN_GPP.joblib    # [LFS] Pre-trained unified TabPFN-GPP model weights (122.6 MB)
-│   └── example_inference.csv# Sample dataset for validation and inference runs
 │
 └── SCOPE/
     ├── PLS_TabPFN.py              # Script to train TabPFN with PLS dimensionality reduction
     ├── wavelenght_importance.py   # Script to evaluate TabPFN wavelength importance via permutation
     ├── plot_importance.py         # Visualizes relative importance of spectral bands
     └── dataset_GPP_Ta_Rin_ea_reflectance_EMIT.csv  # Full training set from SCOPE RTM model
+└── Validation/
+    ├── plot.py              # Script to plot validation results
+    └── validation.csv  # Test set from ICOS/AmeriFlux networks, ERA5 meteorological variables, EMIT real acquisitions.
 ```
 
 ---
@@ -49,7 +50,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Git LFS (Large File Storage) for Model Weights
-The pre-trained model file `Inference/TabPFN_GPP.joblib` is **122.6 MB**, which exceeds GitHub's standard 100 MB file limit. To clone or push this repository without losing the model weights, make sure Git LFS is installed and initialized on your system:
+The pre-trained model file `Model/TabPFN_GPP.joblib` is **122.6 MB**, which exceeds GitHub's standard 100 MB file limit. To clone or push this repository without losing the model weights, make sure Git LFS is installed and initialized on your system:
 
 ```bash
 # Install Git LFS on your OS (Debian/Ubuntu example):
@@ -64,21 +65,14 @@ git lfs install
 
 ## 💻 How to Run
 
-### A. GPP Inference GUI Dashboard
-The GUI dashboard (`gpp_gui.py`) is designed to run out-of-the-box. It provides a premium PyQt6 desktop application to load datasets, select models, run predictions, save tabular results, and view a live scatterplot preview.
 
-To launch the dashboard, run:
-```bash
-python Inference/gpp_gui.py
-```
-
-### B. SCOPE PLS-TabPFN Model Training
+### A. SCOPE PLS-TabPFN Model Training
 To train the PLS-TabPFN pipeline on the provided dataset and save the trained model, run:
 ```bash
 python SCOPE/PLS_TabPFN.py
 ```
 
-### C. Wavelength Importance Analysis
+### B. Wavelength Importance Analysis
 To compute permutation-based wavelength importances (TabPFN-aware) and save the importance mappings:
 ```bash
 python SCOPE/wavelenght_importance.py
@@ -88,6 +82,13 @@ To visualize the computed spectral band importances:
 ```bash
 python SCOPE/plot_importance.py
 ```
+
+### C. Validation Results Plotting
+To evaluate model predictions against the independent validation dataset (from ICOS/AmeriFlux networks) and generate performance scatter plots:
+```bash
+python Validation/plot.py
+```
+This saves the validation performance plots (`validation_landcover.png` and `validation_dataset.png`) under the `Validation/` directory.
 
 ---
 
