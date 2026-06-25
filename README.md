@@ -1,6 +1,6 @@
 # SCOPE GPP Model Inference and Training Dashboard
 
-This repository provides code and pre-trained models to perform GPP (Gross Primary Productivity) modeling and wavelength importance analysis using a unified **TabPFN** and PLS (Partial Least Squares) regression pipeline. 
+This repository provides code and pre-trained models to perform GPP (Gross Primary Productivity) modeling and wavelength importance analysis using a unified **TabPFN** regression pipeline. 
 
 This project is built and distributed under the terms of the TabPFN License.
 
@@ -26,34 +26,29 @@ This project utilizes the **TabPFN** model weights and inference library from Pr
 │   └── example_inference.csv# Sample dataset for validation and inference runs
 │
 └── SCOPE/
-    ├── PLS_TabPFN.py              # Script to train TabPFN with PLS features
+    ├── PLS_TabPFN.py              # Script to train TabPFN with PLS dimensionality reduction
     ├── wavelenght_importance.py   # Script to evaluate TabPFN wavelength importance via permutation
     ├── plot_importance.py         # Visualizes relative importance of spectral bands
-    └── dataset_GPP_Ta_Rin_ea_reflectance_EMIT.csv  # Full model training dataset
+    └── dataset_GPP_Ta_Rin_ea_reflectance_EMIT.csv  # Full training set from SCOPE RTM model
 ```
 
 ---
+## Note
+We designed the entire pipeline in CUDA environment. Even if the codes can run on CPU, we suggest to adopt an NVIDIA GPU with at least 8 GB of VRAM. If you can't get access to a discrete GPU, you can find the key datasets already available.
 
 ## 🛠️ Installation & Setup
 
 Before running the scripts or dashboard, ensure you set up your Python environment and install the required dependencies.
 
-### 1. Activating your Virtual Environment
-If you are using a virtual environment (e.g. at `/home/musashi/venv` or locally), activate it first:
 
-```bash
-# On Linux / macOS:
-source /home/musashi/venv/bin/activate
-```
-
-### 2. Installing Dependencies
+### 1. Installing Dependencies
 Install all package requirements using `pip`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Git LFS (Large File Storage) for Model Weights
+### 2. Git LFS (Large File Storage) for Model Weights
 The pre-trained model file `Inference/TabPFN_GPP.joblib` is **122.6 MB**, which exceeds GitHub's standard 100 MB file limit. To clone or push this repository without losing the model weights, make sure Git LFS is installed and initialized on your system:
 
 ```bash
@@ -64,7 +59,6 @@ sudo apt-get install git-lfs
 git lfs install
 ```
 
-When you push or pull, Git LFS will automatically track and manage `*.joblib` files based on the `.gitattributes` configuration.
 
 ---
 
@@ -79,7 +73,7 @@ python Inference/gpp_gui.py
 ```
 
 ### B. SCOPE PLS-TabPFN Model Training
-To train the PLS-TabPFN pipeline on the provided dataset and save the trained model artifacts, run:
+To train the PLS-TabPFN pipeline on the provided dataset and save the trained model, run:
 ```bash
 python SCOPE/PLS_TabPFN.py
 ```
@@ -90,7 +84,7 @@ To compute permutation-based wavelength importances (TabPFN-aware) and save the 
 python SCOPE/wavelenght_importance.py
 ```
 
-To visualize the computed spectral band importances and flag the water/noisy bands:
+To visualize the computed spectral band importances:
 ```bash
 python SCOPE/plot_importance.py
 ```
