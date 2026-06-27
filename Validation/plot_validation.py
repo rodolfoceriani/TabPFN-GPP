@@ -96,6 +96,17 @@ def main():
         for cover in ordered_covers
     ]
 
+    # Map Forest to black and others to Set1 colors
+    base_colors = sns.color_palette('Set1', len(hue_order))
+    custom_palette = {}
+    color_idx = 0
+    for label in hue_order:
+        if 'Forest' in label:
+            custom_palette[label] = 'black'
+        else:
+            custom_palette[label] = base_colors[color_idx]
+            color_idx += 1
+
     print("Generating LandCover scatterplot...")
     plt.figure(figsize=(10, 8))
     sns.scatterplot(
@@ -104,7 +115,7 @@ def main():
         y='GPP_predicted',
         hue='LandCover_Legend',
         hue_order=hue_order,
-        palette='Set1',
+        palette=custom_palette,
         s=40,
         alpha=0.8
     )
